@@ -106,8 +106,6 @@ angular.module('app.routes', [])
     templateUrl: 'templates/login.html',
     controller: 'loginCtrl'
   })
-$urlRouterProvider.otherwise('/page20')
-
-
+$urlRouterProvider.otherwise('/page5')
 
 });
