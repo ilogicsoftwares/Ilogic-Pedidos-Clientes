@@ -1,0 +1,15 @@
+<ion-view title="Vendedores" id="page14">
+  <ion-content padding="true" class="has-header">
+    <form id="vendedores-form10" class="list">
+      <label class="item item-input" id="vendedores-search8">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="search" placeholder="" ng-model="filtro">
+      </label>
+    </form>
+    <div id="clientes-container1" style="height:500px;overflow:scroll;overflow-x: hidden">
+    <ion-list id="vendedores-list15">
+      <ion-item ng-repeat="item in vendedores | filter : filtro |limitTo:50" ng-click="addVendedor(item)">{{item.nombre}}</ion-item>
+    </div>
+    </ion-list>
+  </ion-content>
+</ion-view>

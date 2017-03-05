@@ -1,0 +1,18 @@
+<ion-view title="Configuración" id="page17">
+  <ion-content padding="true" class="has-header">
+    <form name="myForm" ng-submit="saveConfig(config)" id="configuraciN-form5" class="list">
+      <label class="item item-input" id="configuraciN-input7" name="txtDirection">
+        <input name="server" ng-model="config.server"   type="text" placeholder="Dirección del Servidor o Dns " required>
+      </label>
+      <label class="item item-input" id="configuraciN-input8" name="txtDirection">
+        <input ng-model="config.id_empresa"type="text" placeholder="idempresa" required>
+      </label>
+      <label class="item item-input" id="configuraciN-input9" name="txtDirection">
+        <input ng-model="config.agencia" type="text" placeholder="agencia" required>
+      </label>
+      <button id="configuraciN-button24" class="button button-positive  button-block button-outline">Validar</button>
+      <button type="submit" id="configuraciN-but  ton25" class="button button-assertive  button-block button-outline">Guardar</button>
+    </form>
+
+  </ion-content>
+</ion-view>

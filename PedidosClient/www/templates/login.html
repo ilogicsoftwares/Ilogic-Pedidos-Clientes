@@ -1,0 +1,26 @@
+<ion-view title="Login" hide-back-button="true" id="page20">
+  <ion-nav-buttons side="left" scroll="false" class="has-header">
+    <button class="button button-icon icon No Icon"></button>
+  </ion-nav-buttons>
+  <ion-content padding="true" scroll="false" class="has-header">
+    <div style="margin: 0px; line-height: 250px; background-color: rgb(232, 235, 239); text-align: center;">
+      <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
+    </div>
+    <form id="login-form1" class="list">
+      <ion-list id="login-list1">
+        <label class="item item-select" id="login-select1">
+          <span class="input-label">Vendedor</span>
+          <select ng-model="selectedVend">
+             <option ng-repeat="item in vendedores" value="{{item}}">{{item.nombre}}</option>
+          </select>
+        </label>
+        <label class="item item-input" id="login-input2">
+          <span class="input-label">Password</span>
+          <input ng-model="passwordx" type="password" placeholder="">
+        </label>
+      </ion-list>
+      <button ng-click="login(passwordx,selectedVend)" id="login-button1" class="button button-stable  button-block">Ingresar</button>
+      <button ng-click="config()" id="login-button3" class="button button-stable  button-block">Configurar</button>
+    </form>
+  </ion-content>
+</ion-view>

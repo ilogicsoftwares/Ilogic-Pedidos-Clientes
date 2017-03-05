@@ -1,0 +1,42 @@
+<ion-view title="Pedido" id="page4">
+  <ion-content padding="true" class="has-header">
+    <h5 id="pedido-heading3" style="color:#000000;">Pedido Id: {{currentPedido.codigo}}</h5>
+    <div class="list">
+
+    <div class="item item-input-inset">
+      <label class="item-input-wrapper">
+        <input  ng-model="currentPedido.cliente.nombre" type="text" placeholder="Cliente">
+      </label>
+      <a ui-sref="clientes({state:'pedido'})"   class="button button-small" >
+        Add
+      </a>
+    </div>
+     <a ui-sref="productos({state:'pedido'})" id="pedido-button9" class="button button-positive button-small button-block button-outline">Agregar Producto</a>
+  </div>
+
+    <div id="pedido-container1" style="height:250px;overflow:scroll;overflow-x: hidden">
+      <ion-list id="pedido-list17" show-delete="shouldShowDelete"  can-swipe="true">
+        <ion-item ng-repeat="item in currentPedido.productos track by $index" id="pedido-list-item85">
+          <p>{{item.producto.nombre}}</p>
+           <p class="item-note">{{"Cant: " + item.cantidad + "x" + item.producto.precio1 +"=" +item.cantidad*item.producto.precio1}}</p>
+           <ion-option-button ng-click="removeItem($index)" class="ion-minus-circled button-assertive"></ion-option-button>
+        </ion-item>
+
+      </ion-list>
+    </div>
+    <div id="pedido-markdown2" style="text-align:right;" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">Total Items:
+        <strong>{{getotalItems()}}</strong>
+      </p>
+    </div>
+    <div id="pedido-markdown3" style="text-align:right;" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">Total $:
+        <strong>{{getTotal()}}</strong>
+      </p>
+
+    </div>
+    <a  id="pedido-button10" ng-click="proccess(currentPedido,'procesado')" class="button button-positive button-small button-block button-outline">Procesar Pedido</a>
+    <a  id="pedido-button11" ng-click="proccess(currentPedido,'pendiente')" class="button button-positive button-small button-block button-outline">Guardar Pedido</a>
+    <p class="text-center">{{message}}</p>
+  </ion-content>
+</ion-view>
