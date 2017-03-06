@@ -4,11 +4,12 @@ angular.module('app.controllers', [])
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams,$state,Vendedores) {
-
+  $scope.$on('$stateChangeSuccess', function () {
 $scope.selectedVend={};
+
 $scope.vendedores=Vendedores.get();
 $scope.passwordx="";
-
+});
 $scope.login=function(pass,vend){
    var vende=JSON.parse(vend);
    if(pass==vende.claverest.trim()){

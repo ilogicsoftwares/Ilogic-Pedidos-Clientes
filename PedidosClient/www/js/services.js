@@ -329,7 +329,7 @@ return{
   process:proccess,
   getid:getid,
   setall:setall,
-  setCurPedido
+  setCurPedido:setCurPedido
 }
 
 }])
