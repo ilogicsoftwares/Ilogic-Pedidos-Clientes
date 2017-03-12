@@ -8,7 +8,7 @@
     </form>
     <div id="productos-container1" style="height:500px;overflow:scroll;overflow-x: hidden">
     <ion-list id="productos-list13">
-      <ion-item id="productos-list-item61" ng-repeat="item in items | filter : finder | limitTo:20" ng-click="addproducto(item)">
+      <ion-item id="productos-list-item61" ng-repeat="item in items | filter : finder | limitTo:20" ng-click="addproducto(item)" on-hold="editProduct(item)">
         <p>{{item.codigo}}</p>
         <p>{{item.nombre}}</p>
         <p>${{item.precio1}}<span class="item-note">{{item.exislr}}</span></p>

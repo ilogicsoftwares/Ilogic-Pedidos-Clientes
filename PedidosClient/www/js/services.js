@@ -35,6 +35,10 @@ var save=function(object){
 }
 var get=function(){
   config=Storage.get("config");
+  if (config==null)
+  {
+    return {};
+  }
   return config;
 }
 
@@ -148,8 +152,28 @@ return{
   getcurrVend:getcurrVend
 }
 }])
-.factory('Clientes', ["$window","$http","$q","Config","Storage","Messages",function($window,$http,$q,Config,Storage,Messages){
+.factory('Clientes', ["$window","$http","$q","Config","Storage","Messages","Vendedores",
+function($window,$http,$q,Config,Storage,Messages,Vendedores){
 var clientes=[];
+var tipoClientes=[];
+var newClient=function(){
+  return {
+    codigo:'',
+    nombre:'',
+    nrorif:'',
+    nronit:'',
+    fecha:Date(),
+    email:'',
+    direccion:'',
+    telefonos:'',
+    telefon_movil:'',
+    numerofax:'',
+    vendedor:Vendedores.getcurrVend(),
+    tipo:null,
+    status:'tosync'
+  }
+}
+var curCliente=newClient();
 var messageT="";
 var sync = function(){
   var df = $q.defer();
@@ -164,8 +188,53 @@ var sync = function(){
 
     return df.promise;
 }
+var syncTypes = function(){
+  var df = $q.defer();
+  var url= Config.get().server +"/TipoClientes" ;
+  $http.get(url).then(function(data){
+    tipoClientes=data.data;
+    Storage.set("tipoClientes",tipoClientes);
+    df.resolve(tipoClientes);
+  },function(error){
+    df.reject(error);
+  })
+
+    return df.promise;
+}
 var messagex=function(){
   return messageT;
+}
+var setcurClient=function(cliente){
+  curCliente=cliente;
+}
+var addnew=function(){
+  setcurClient(newClient());
+}
+var save=function(cliente){
+  var actualClientes=get();
+  var canAdd=true;
+  var result=actualClientes.forEach(function(item,index){
+   if (item!=null)
+    {
+      if (item.codigo==cliente.codigo)
+      {
+      canAdd= false;
+      return;
+      }
+  }
+    canAdd= true;
+  })
+
+  if (canAdd==false)
+  {
+    return canAdd;
+  }
+  actualClientes.push(getcurClient());
+  Storage.set("clientes",actualClientes)
+  return canAdd
+}
+var getcurClient=function(){
+  return curCliente;
 }
 var get=function(){
   if (clientes.length >0)
@@ -175,10 +244,24 @@ var get=function(){
   var pi=Storage.get("clientes");
   return pi != null ? pi :[];
 }
+var getTypes=function(){
+  if (tipoClientes.length >0)
+  {
+    return tipoClientes;
+  }
+  var pi=Storage.get("tipoClientes");
+  return pi != null ? pi :[];
+}
 return{
   sync:sync,
   message:messagex,
-  get:get
+  get:get,
+  setcurClient:setcurClient,
+  getcurClient:getcurClient,
+  save:save,
+  addnew:addnew,
+  getTypes:getTypes,
+  syncTypes:syncTypes
 }
 
 }])
@@ -196,6 +279,11 @@ var init=function(){
 
     Clientes.sync().then(function(){
       messages.add("Clientes Actualizados")
+    },function(error){
+      messages.add(error.data);
+    });
+    Clientes.syncTypes().then(function(){
+      messages.add("Tipo de Clientes Actualizados")
     },function(error){
       messages.add(error.data);
     });
@@ -241,7 +329,7 @@ var productoP=function(producto,cantidad){
       cantidad:0
     };
 }
-var curprod={};
+var curprod=productoP(null,0);
 var pedido= function(id){
 return{codigo:id,
   vendedor:Vendedores.getcurrVend(),
@@ -292,9 +380,29 @@ var setClient=function(item){
    getCurPedido().cliente=item;
 
 }
-var setcurprod=function(item){
+var setcurprod=function(item,cant){
     curprod.producto=item;
-    curprod.cantidad=1;
+    curprod.cantidad=cant;
+}
+var getprecios=function(){
+  var listaprecios=[];
+  precio=function(id,precio){
+    return{
+      id:id,
+      precio:precio
+    }
+  }
+  if (getCurProd().producto==null)
+  {
+    return listaprecios;
+  }
+  for (var i=1;i<=8;i++)
+  {
+    var strprice="preciofin" + i.toString();
+    listaprecios.push(precio(i,getCurProd().producto[strprice]));
+  }
+
+  return listaprecios;
 }
 var setVendor=function(item){
    getCurPedido().vendedor=item;
@@ -329,7 +437,27 @@ return{
   process:proccess,
   getid:getid,
   setall:setall,
-  setCurPedido:setCurPedido
+  setCurPedido:setCurPedido,
+  getprecios:getprecios
 }
+}])
+.factory('TimeMsg', ["$window","$timeout",function($window,$timeout){
 
+    message={
+      message:"",
+      color:"Red"
+    }
+
+   var get =function(){
+     return message;
+   }
+   var set =function(msg,time,color="Red"){
+     get().message=msg;
+     get().color=color;
+     $timeout(function () { get().message="";return;}, time);
+   }
+return{
+  get:get,
+  set:set
+}
 }])

@@ -37,6 +37,6 @@
     </div>
     <a  id="pedido-button10" ng-click="proccess(currentPedido,'procesado')" class="button button-positive button-small button-block button-outline">Procesar Pedido</a>
     <a  id="pedido-button11" ng-click="proccess(currentPedido,'pendiente')" class="button button-positive button-small button-block button-outline">Guardar Pedido</a>
-    <p class="text-center">{{message}}</p>
+    <p class="text-center" style="color:{{message.color}}">{{message.message}}</p>
   </ion-content>
 </ion-view>

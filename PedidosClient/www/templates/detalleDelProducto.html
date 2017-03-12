@@ -1,24 +1,27 @@
 <ion-view title="Detalle del Producto" id="page10">
   <ion-content padding="true" class="has-header">
-    <div id="detalleDelProducto-markdown4" class="show-list-numbers-and-dots">
-      <p style="color:#000000;">Descripción:
-        <strong>Producto X</strong>
+    <div id="detalleDelProducto-markdown1" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">Producto codigo:
+        <strong>{{producto.producto.codigo}}</strong>
       </p>
     </div>
-    <div id="detalleDelProducto-markdown5" class="show-list-numbers-and-dots">
-      <p style="color:#000000;">Precio Final $:
-        <strong>0.00</strong>
-      </p>
+    <div id="detalleDelProducto-markdown2" class="show-list-numbers-and-dots">
+      <p style="color:#000000;">Descripción</p>
     </div>
-    <div id="detalleDelProducto-markdown6" class="show-list-numbers-and-dots">
-      <p style="color:#000000;">Precio Sin Imp $:
-        <strong>0.00</strong>
-      </p>
-    </div>
-    <div id="detalleDelProducto-markdown7" class="show-list-numbers-and-dots">
-      <p style="color:#000000;">Existencia:
-        <strong>0.00</strong>
-      </p>
-    </div>
+    <form id="detalleDelProducto-form3" class="list">
+      <label class="item item-input" id="detalleDelProducto-input4">
+        <input ng-model="producto.producto.nombre" type="text" placeholder="">
+      </label>
+      <label class="item item-input" id="detalleDelProducto-input5">
+        <span class="input-label">Cantidad:</span>
+        <input ng-model="producto.cantidad" type="number" placeholder="">
+      </label>
+      <label class="item item-input" id="detalleDelProducto-input6">
+        <span class="input-label">Precio:</span>
+        <input ng-model="producto.producto.precio1" type="number" placeholder="">
+      </label>
+    </form>
+    <button ng-click="addprice()" id="detalleDelProducto-button4" class="button button-positive  button-block">Agregar Precio</button>
+    <button ng-click="addproducto()" id="detalleDelProducto-button5" class="button button-positive  button-block">Aplicar</button>
   </ion-content>
 </ion-view>

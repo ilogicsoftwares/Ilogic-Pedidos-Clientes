@@ -1,0 +1,46 @@
+<ion-view title="Nuevo Cliente" id="page22">
+  <ion-content padding="true" class="has-header">
+    <form id="nuevoCliente-form4" class="list">
+      <label class="item item-input" id="nuevoCliente-input7">
+        <span class="input-label">Codigo:</span>
+        <input ng-model="cliente.codigo" type="text" placeholder="">
+      </label>
+      <label class="item item-input" id="nuevoCliente-input8">
+        <span class="input-label">Nombre:</span>
+        <input ng-model="cliente.nombre" type="text" placeholder="">
+      </label>
+      <label class="item item-input" id="nuevoCliente-input9">
+        <span class="input-label">Rif/Ruc:</span>
+        <input ng-model="cliente.nrorif" type="text" placeholder="">
+      </label>
+      <label class="item item-input" id="nuevoCliente-input10">
+        <span class="input-label">Div/Nit:</span>
+        <input ng-model="cliente.nronit" type="text" placeholder="">
+      </label>
+      <label class="item item-input" id="nuevoCliente-input11">
+        <span class="input-label">Dirección:</span>
+        <input ng-model="cliente.direccion" type="text" placeholder="">
+      </label>
+      <label class="item item-input" id="nuevoCliente-input12">
+        <span class="input-label">Telf:</span>
+        <input ng-model="cliente.telefonos" type="text" placeholder="">
+      </label>
+      <label class="item item-input" id="nuevoCliente-input13">
+        <span class="input-label">Email:</span>
+        <input ng-model="cliente.email" type="text" placeholder="">
+      </label>
+      <label class="item item-select" id="nuevoCliente-select2">
+        <span class="input-label">Tipo</span>
+        <select ng-model="cliente.tipo">
+        <option ng-repeat="item in tiposvend" value="{{item}}">{{item.nombre}}</option>
+        </select>
+      </label>
+    </form>
+    <div id="nuevoCliente-markdown3" class="show-list-numbers-and-dots">
+      <p style="color:{{message.color}};"
+        <strong>{{message.message}}</strong>
+      </p>
+    </div>
+    <button ng-click="save()" id="nuevoCliente-button6" class="button button-positive button-small button-block button-outline">Guardar</button>
+  </ion-content>
+</ion-view>

@@ -106,6 +106,17 @@ angular.module('app.routes', [])
     templateUrl: 'templates/login.html',
     controller: 'loginCtrl'
   })
+  .state('listaDePrecios', {
+    url: '/page21',
+    templateUrl: 'templates/listaDePrecios.html',
+    controller: 'listaDePreciosCtrl'
+  })
+  .state('nuevoCliente', {
+    url: '/page22',
+    templateUrl: 'templates/nuevoCliente.html',
+    controller: 'nuevoClienteCtrl'
+  })
+
 $urlRouterProvider.otherwise('/page20')
 
 });
